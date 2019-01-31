@@ -1,7 +1,9 @@
 package domain;
 
+import java.lang.reflect.Array;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Order
 {
@@ -28,6 +30,16 @@ public class Order
         tickets.add(ticket);
     }
 
+    public Boolean IsDayInWeekend(DayOfWeek dayOfWeek)
+    {
+        ArrayList<DayOfWeek> weekendDays = new ArrayList<>();
+        weekendDays.add(DayOfWeek.FRIDAY);
+        weekendDays.add(DayOfWeek.SATURDAY);
+        weekendDays.add(DayOfWeek.SUNDAY);
+
+        return weekendDays.contains(dayOfWeek);
+    }
+
 
     public double calculatePrice()
     {
@@ -35,7 +47,7 @@ public class Order
         MovieScreening firstScreeningOfTicket = firstTicket.getMovieScreening();
         DayOfWeek day = firstScreeningOfTicket.getDateAndTime().getDayOfWeek();
 
-        if (day == DayOfWeek.MONDAY || day == DayOfWeek.TUESDAY || day == DayOfWeek.WEDNESDAY || day == DayOfWeek.THURSDAY){
+        if (!IsDayInWeekend(day) || IsDayInWeekend(day) && isStudentOrder ){
             if (tickets.size() % 2 == 0){
                 for (MovieTicket ticket : tickets){
                     double totalPriceOfOrder =+ ticket.getPrice();
@@ -49,36 +61,21 @@ public class Order
             }
         }
 
-        if (day == DayOfWeek.FRIDAY || day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY ){
-            if (isStudentOrder){
-                if (tickets.size() % 2 == 0){
-
-                    for (MovieTicket ticket : tickets){
-                        double totalPriceOfOrder =+ ticket.getPrice();
-                        return totalPriceOfOrder / 2;
-                    }
-                } else {
-                    for (MovieTicket ticket : tickets){
-                        double totalPriceOfOrder =+ ticket.getPrice();
-                        return (totalPriceOfOrder / 2) + firstTicket.getPrice();
-                    }
-                }
-            } else{
-                if (tickets.size() > 6){
-                    for (MovieTicket ticket : tickets){
-                        double totalPriceOfOrder =+ ticket.getPrice();
+             else {
+                if (tickets.size() > 6) {
+                    for (MovieTicket ticket : tickets) {
+                        double totalPriceOfOrder = +ticket.getPrice();
                         return totalPriceOfOrder * 0.90;
                     }
                 } else {
-                    for (MovieTicket ticket : tickets){
-                        double totalPriceOfOrder =+ ticket.getPrice();
+                    for (MovieTicket ticket : tickets) {
+                        double totalPriceOfOrder = +ticket.getPrice();
                         return totalPriceOfOrder;
                     }
                 }
 
             }
 
-        }
         return 0;
     }
 
