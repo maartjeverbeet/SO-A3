@@ -10,8 +10,5 @@
         <module name="cinemapricecalculator" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="cinema-price-calculator" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
