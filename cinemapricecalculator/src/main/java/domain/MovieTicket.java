@@ -30,6 +30,11 @@ public class MovieTicket
         return movieScreening.getPricePerSeat();
     }
 
+
+    public MovieScreening getMovieScreening() {
+        return movieScreening;
+    }
+
     @Override
     public String toString() {
         return movieScreening.toString() + " - row " + seatRow + ", seat " + seatNr +
