@@ -46,37 +46,36 @@ public class Order
         MovieTicket firstTicket = tickets.get(0);
         MovieScreening firstScreeningOfTicket = firstTicket.getMovieScreening();
         DayOfWeek day = firstScreeningOfTicket.getDateAndTime().getDayOfWeek();
+        double totalPriceOfOrder = 0;
 
         if (!IsDayInWeekend(day) || IsDayInWeekend(day) && isStudentOrder ){
             if (tickets.size() % 2 == 0){
                 for (MovieTicket ticket : tickets){
-                    double totalPriceOfOrder =+ ticket.getPrice();
-                    return totalPriceOfOrder / 2;
+                    totalPriceOfOrder += ticket.getPrice();
                 }
+                return totalPriceOfOrder / 2;
             } else {
                 for (MovieTicket ticket : tickets){
-                    double totalPriceOfOrder =+ ticket.getPrice();
-                    return (totalPriceOfOrder / 2) + firstTicket.getPrice();
+                    totalPriceOfOrder += ticket.getPrice();
                 }
+                return (totalPriceOfOrder / 2) + (firstTicket.getPrice() / 2);
             }
         }
 
              else {
                 if (tickets.size() > 6) {
                     for (MovieTicket ticket : tickets) {
-                        double totalPriceOfOrder = +ticket.getPrice();
-                        return totalPriceOfOrder * 0.90;
+                        totalPriceOfOrder += ticket.getPrice();
                     }
+                    return totalPriceOfOrder * 0.90;
                 } else {
                     for (MovieTicket ticket : tickets) {
-                        double totalPriceOfOrder = +ticket.getPrice();
-                        return totalPriceOfOrder;
+                        totalPriceOfOrder += ticket.getPrice();
                     }
+                    return totalPriceOfOrder;
                 }
 
             }
-
-        return 0;
     }
 
     public void export(TicketExportFormat exportFormat)
