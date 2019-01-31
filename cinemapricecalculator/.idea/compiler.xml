@@ -6,8 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="cinema-price-calculator" />
         <module name="cinemapricecalculator" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cinema-price-calculator" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
